@@ -28,4 +28,8 @@ public class SessionController {
       public  Session create(@RequestBody final  Session session){
           return sessionRepository.saveAndFlush(session);
       }
+
+      public void delete (){
+          
+      }
 }
