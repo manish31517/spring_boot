@@ -19,16 +19,18 @@ public class Session {
             joinColumns = @JoinColumn(name = "session_id"),
             inverseJoinColumns = @JoinColumn(name="speaker_id")
     )
-    public List<Speaker> getSpeakerList() {
 
-        return speakerList;
+
+    private List<Speaker> speakers;
+
+    public List<Speaker> getSpeakers() {
+        return speakers;
     }
 
-    public void setSpeakerList(List<Speaker> speakerList) {
-        this.speakerList = speakerList;
+    public void setSpeakers(List<Speaker> speakers) {
+        this.speakers = speakers;
     }
 
-    private List<Speaker> speakerList;
     public Session(){
 
    }
