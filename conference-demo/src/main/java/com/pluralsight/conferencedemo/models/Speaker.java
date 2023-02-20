@@ -1,10 +1,13 @@
 package com.pluralsight.conferencedemo.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import org.hibernate.annotations.Type;
 
 import java.util.List;
-
+@JsonIgnoreProperties({"hibernateLazyInitialzer", "handler"})
 @Entity(name="speakers")
 public class Speaker {
     @Id
@@ -16,6 +19,9 @@ public class Speaker {
     private String company;
     private String speaker_bio;
     @ManyToMany(mappedBy = "speakers")
+//    @JsonBackReference
+    @JsonIgnore
+
     private List<Session> sessions;
 
     @Lob

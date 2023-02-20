@@ -1,18 +1,23 @@
 package com.pluralsight.conferencedemo.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
 
-
+@JsonIgnoreProperties({"hibernateLazyInitialzer", "handler"})
 @Entity(name="sessions")
 public class Session {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
+
     private  Long session_id;
-    private String seesion_name;
+    private String session_name;
     private String session_description;
     private Integer session_length;
+
     @ManyToMany
     @JoinTable(
             name = "session_speakers",
@@ -20,7 +25,7 @@ public class Session {
             inverseJoinColumns = @JoinColumn(name="speaker_id")
     )
 
-
+//    @JsonIgnore
     private List<Speaker> speakers;
 
     public List<Speaker> getSpeakers() {
@@ -43,12 +48,12 @@ public class Session {
         this.session_id = session_id;
     }
 
-    public String getSeesion_name() {
-        return seesion_name;
+    public String getSession_name() {
+        return session_name;
     }
 
-    public void setSeesion_name(String seesion_name) {
-        this.seesion_name = seesion_name;
+    public void setSession_name(String seesion_name) {
+        this.session_name = seesion_name;
     }
 
     public String getSession_description() {

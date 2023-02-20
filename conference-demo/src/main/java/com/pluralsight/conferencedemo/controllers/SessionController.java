@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/vi/sessions ")
+@RequestMapping("/api/vi/sessions")
 public class SessionController {
       @Autowired
       private SessionRepository sessionRepository;
@@ -22,7 +22,7 @@ public class SessionController {
       @GetMapping
       @RequestMapping("{id}")
       public  Session get(@PathVariable long id){
-          return sessionRepository.getOne(id);
+          return sessionRepository.findById(id).get();
       }
 
       @PostMapping
@@ -35,9 +35,10 @@ public class SessionController {
             sessionRepository.deleteById(id);
       }
 
-      @RequestMapping(value = {"id"}, method =  RequestMethod.PUT)
+//      @RequestMapping(value = {"id"}, method =  RequestMethod.PUT)
+      @PutMapping(path = "/{id}")
       public  Session update (@PathVariable Long id , @RequestBody final Session session){
-            Session existingSession = sessionRepository.getOne(id);
+            Session existingSession = sessionRepository.findById(id).get();
             //TODO: add  validation that all attribute are passed in otherwise return a 400 bad payload
             BeanUtils.copyProperties(session,existingSession,"session_id");
             return sessionRepository.saveAndFlush(existingSession);
